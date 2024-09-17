@@ -2,6 +2,7 @@
   "watch": [
     "typeorm",
     "index.ts",
+    "data-source.ts",
     "package.json"
   ],
   "ext": ".ts,.js",
