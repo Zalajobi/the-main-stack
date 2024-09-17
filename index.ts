@@ -7,6 +7,8 @@ import rootRouter from "./route/router";
 import {AppDataSource} from "./data-source";
 import {DataSource} from "typeorm";
 import {authorizeRequest} from "./middleware/auth";
+import {User} from "./typeorm/entity/User";
+import cryptoClient from "./lib/crypto";
 
 const app = express();
 
@@ -40,17 +42,15 @@ AppDataSource.initialize().then(async (init: DataSource) => {
   await init.runMigrations();
   console.log("Initialised TypeORM, Migration Successful...");
 
-  // const product = new Product();
-  // product.brand = "Apple";
-  // product.name = "iPhone 13";
-  // product.price = 999;
-  // product.category = "Smartphone";
-  // product.description = "The latest iPhone";
-  // product.rating = 5;
-  // product.reviewCount = 100;
-  //
-  // const newProduct = await productRepository().save(product)
-  // console.log(newProduct);
+  const user = new User();
+  user.email = "zalajobi@gmail.com";
+  user.firstName = "Zhikrullah";
+  user.lastName = "IGBALAJOBI";
+  user.password = cryptoClient.generatePasswordHash("password");
+  user.dob = new Date("1995-01-01");
+
+  // const newUser = await userRepository().save(user);
+  // console.log(newUser)
 })
 
 app.listen(process.env.PROJECT_PORT, () => {

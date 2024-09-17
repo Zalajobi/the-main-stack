@@ -15,3 +15,15 @@ export const JsonApiResponse = (
     error,
   }).status(statusCode);
 };
+
+export const DefaultJsonResponse = (
+  message: string,
+  data: any,
+  success: boolean,
+) => {
+  return {
+    message,
+    data,
+    success,
+  };
+};

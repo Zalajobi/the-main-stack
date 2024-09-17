@@ -22,6 +22,7 @@ export class User {
   @Column({
     name: "email",
     nullable: false,
+    unique: true,
   })
   email: string;
 
@@ -34,8 +35,9 @@ export class User {
   @Column({
     name: "dob",
     nullable: true,
+    type: "timestamp"
   })
-  dob: string;
+  dob: Date;
 
   @Column({
     nullable: true,
