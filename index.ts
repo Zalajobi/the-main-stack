@@ -3,9 +3,13 @@ import "module-alias/register";
 import 'reflect-metadata';
 import express = require('express');
 import cors = require('cors');
-import rootRouter from "./routes/router";
+import rootRouter from "./route/router";
 import {AppDataSource} from "./data-source";
 import {DataSource} from "typeorm";
+import {authorizeRequest} from "./middleware/auth";
+import {User} from "./typeorm/entity/User";
+import cryptoClient from "./lib/crypto";
+import {errorMiddleware} from "./middleware/error";
 
 const app = express();
 
@@ -31,24 +35,24 @@ app.use(
   })
 );
 
+app.use(authorizeRequest);
 app.use("/", rootRouter);
+app.use(errorMiddleware);
 
 AppDataSource.initialize().then(async (init: DataSource) => {
   console.log("Initialising TypeORM...");
   await init.runMigrations();
   console.log("Initialised TypeORM, Migration Successful...");
 
-  // const product = new Product();
-  // product.brand = "Apple";
-  // product.name = "iPhone 13";
-  // product.price = 999;
-  // product.category = "Smartphone";
-  // product.description = "The latest iPhone";
-  // product.rating = 5;
-  // product.reviewCount = 100;
-  //
-  // const newProduct = await productRepository().save(product)
-  // console.log(newProduct);
+  const user = new User();
+  user.email = "zalajobi@gmail.com";
+  user.firstName = "Zhikrullah";
+  user.lastName = "IGBALAJOBI";
+  user.password = cryptoClient.generatePasswordHash("password");
+  user.dob = new Date("1995-01-01");
+
+  // const newUser = await userRepository().save(user);
+  // console.log(newUser)
 })
 
 app.listen(process.env.PROJECT_PORT, () => {
