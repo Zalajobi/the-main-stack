@@ -1,7 +1,11 @@
-import express = require('express');
 import "dotenv/config";
+import "module-alias/register";
+import 'reflect-metadata';
+import express = require('express');
 import cors = require('cors');
 import rootRouter from "./routes/router";
+import {AppDataSource} from "./data-source";
+import {DataSource} from "typeorm";
 
 const app = express();
 
@@ -28,6 +32,24 @@ app.use(
 );
 
 app.use("/", rootRouter);
+
+AppDataSource.initialize().then(async (init: DataSource) => {
+  console.log("Initialising TypeORM...");
+  await init.runMigrations();
+  console.log("Initialised TypeORM, Migration Successful...");
+
+  // const product = new Product();
+  // product.brand = "Apple";
+  // product.name = "iPhone 13";
+  // product.price = 999;
+  // product.category = "Smartphone";
+  // product.description = "The latest iPhone";
+  // product.rating = 5;
+  // product.reviewCount = 100;
+  //
+  // const newProduct = await productRepository().save(product)
+  // console.log(newProduct);
+})
 
 app.listen(process.env.PROJECT_PORT, () => {
   console.log(`Example app listening on port ${process.env.PROJECT_PORT}`);
