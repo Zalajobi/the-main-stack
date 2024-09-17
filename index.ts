@@ -1,6 +1,7 @@
 import express = require('express');
 import "dotenv/config";
 import cors = require('cors');
+import rootRouter from "./routes/router";
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/", rootRouter);
 
 app.listen(process.env.PROJECT_PORT, () => {
   console.log(`Example app listening on port ${process.env.PROJECT_PORT}`);
