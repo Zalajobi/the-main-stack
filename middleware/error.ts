@@ -35,7 +35,6 @@ export const errorMiddleware = async (
       message: err.message,
       name: err.name,
     });
-    return;
   }
 
   // JWT TOKEN Expired Error
@@ -54,6 +53,5 @@ export const errorMiddleware = async (
       message: err.message,
       name: err.name,
     });
-    return;
   }
 };
