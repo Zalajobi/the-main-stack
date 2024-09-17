@@ -5,7 +5,6 @@ import jwtClient from "../lib/jwt";
 import {bearerTokenSchema} from "../schema/commonSchamas";
 import {ACCESS_TOKEN_HEADER_NAME, FIVE_MINUTE_MILLISECONDS} from "../util/constants";
 
-// Note - Not Functional for the changed use-case
 export const authorizeRequest = async (
   req: Request,
   res: Response,

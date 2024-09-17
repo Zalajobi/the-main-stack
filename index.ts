@@ -9,6 +9,7 @@ import {DataSource} from "typeorm";
 import {authorizeRequest} from "./middleware/auth";
 import {User} from "./typeorm/entity/User";
 import cryptoClient from "./lib/crypto";
+import {errorMiddleware} from "./middleware/error";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(
 
 app.use(authorizeRequest);
 app.use("/", rootRouter);
+app.use(errorMiddleware);
 
 AppDataSource.initialize().then(async (init: DataSource) => {
   console.log("Initialising TypeORM...");
