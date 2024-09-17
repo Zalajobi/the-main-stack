@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Zalajobi/the-main-stack/issues"
   },
-  "homepage": "https://github.com/Zalajobi/the-main-stack#readme"
+  "homepage": "https://github.com/Zalajobi/the-main-stack#readme",
+  "dependencies": {
+    "mongodb": "^5.9.2",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  }
 }
