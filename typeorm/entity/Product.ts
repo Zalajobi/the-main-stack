@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn} from "typeorm";
+import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity()
 export class Product {
@@ -15,7 +15,7 @@ export class Product {
   description: string;
 
   @Column()
-  image: string;
+  images: string[];
 
   @Column()
   category: string;
@@ -23,15 +23,15 @@ export class Product {
   @Column()
   stock: number;
 
-  @Column()
-  rating: number;
+  @ObjectIdColumn({
+    name: "sellerId"
+  })
+  sellerId: ObjectId;
 
-  @Column()
-  reviewCount: number;
-
-  // @ts-ignore
-  @Column()
-  brand: string;
+  @ObjectIdColumn({
+    name: "objectId",
+  })
+  brandId: ObjectId;
 
   @CreateDateColumn({
     name: "createdAt",

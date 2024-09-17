@@ -1,35 +1,22 @@
 import {Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn} from "typeorm";
+import {OrderItem} from "./OrderItem";
 
 @Entity()
-export class Brand {
+export class Order {
   @ObjectIdColumn()
   id: ObjectId;
 
-  @Column()
-  name: string;
+  @ObjectIdColumn()
+  userId: ObjectId;
+
+  @Column(() => OrderItem)
+  items: OrderItem[];
 
   @Column()
-  description: string;
+  totalAmount: number;
 
   @Column()
-  image: string;
-
-  @Column()
-  country: string;
-
-  @Column()
-  state: string;
-
-  @Column()
-  address: string;
-
-  @ObjectIdColumn({
-    name: "sellerId"
-  })
-  sellerId: ObjectId;
-
-  @Column("array")
-  products: ObjectId[];
+  status: string;
 
   @CreateDateColumn({
     name: "createdAt",

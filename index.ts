@@ -1,10 +1,11 @@
-import express = require('express');
 import "dotenv/config";
+import "module-alias/register";
+import 'reflect-metadata';
+import express = require('express');
 import cors = require('cors');
 import rootRouter from "./routes/router";
 import {AppDataSource} from "./data-source";
 import {DataSource} from "typeorm";
-import console from "node:console";
 
 const app = express();
 
