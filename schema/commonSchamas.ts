@@ -12,5 +12,14 @@ export const LoginRequestSchema = z
     return !data.email.includes("+"); // do not allow + sign in email
   });
 
-export type LoginRequestSchema = z.infer<typeof LoginRequestSchema>;
+export const bearerTokenSchema = z.object({
+  authorization: z
+    .string()
+    .refine((data) => data.startsWith("Bearer "), {
+      message: "Authorization header must start with 'Bearer '",
+    })
+    .transform((data) => data.replace("Bearer ", "")),
+});
 
+export type LoginRequestSchema = z.infer<typeof LoginRequestSchema>;
+export type bearerTokenSchema = z.infer<typeof bearerTokenSchema>;
