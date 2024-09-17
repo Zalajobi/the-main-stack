@@ -1,6 +1,11 @@
 {
   "watch": [
     "typeorm",
+    "middleware",
+    "lib",
+    "types",
+    "schema",
+    "route",
     "index.ts",
     "data-source.ts",
     "package.json"
