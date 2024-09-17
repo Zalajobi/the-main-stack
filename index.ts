@@ -6,6 +6,7 @@ import cors = require('cors');
 import rootRouter from "./route/router";
 import {AppDataSource} from "./data-source";
 import {DataSource} from "typeorm";
+import {authorizeRequest} from "./middleware/auth";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(
   })
 );
 
+app.use(authorizeRequest);
 app.use("/", rootRouter);
 
 AppDataSource.initialize().then(async (init: DataSource) => {
