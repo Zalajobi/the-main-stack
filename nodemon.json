@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "typeorm",
+    "index.ts",
+    "package.json"
+  ],
+  "ext": ".ts,.js",
+  "ignore": [],
+  "exec": "npx ts-node index.ts"
+}
