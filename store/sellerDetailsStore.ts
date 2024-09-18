@@ -1,10 +1,10 @@
-import {SellerSignupRequestSchema} from "../schema/userSchemas";
-import {sellerDetailsRepository} from "../typeorm/repositories";
-import {DefaultJsonResponse} from "../lib/responses";
-import {DefaultFunctionResponse} from "../types/index.types";
-import {ObjectId} from "typeorm";
-import {updateUserDetailsByUserId} from "./userStore";
-import {SellerDetails} from "../typeorm/entity/SellerDetails";
+import { SellerSignupRequestSchema } from "../schema/userSchemas";
+import { sellerDetailsRepository } from "../typeorm/repositories";
+import { DefaultJsonResponse } from "../lib/responses";
+import { DefaultFunctionResponse } from "../types/index.types";
+import { ObjectId } from "typeorm";
+import { updateUserDetailsByUserId } from "./userStore";
+import { SellerDetails } from "../typeorm/entity/SellerDetails";
 
 export const createNewSellerDetails = async (
   data: SellerSignupRequestSchema,
@@ -67,6 +67,6 @@ export const getSellerDetailsById = async (sellerId: ObjectId) => {
   return await sellerDetailsRepo.findOne({
     where: {
       _id: sellerId,
-    }
+    },
   });
-}
+};

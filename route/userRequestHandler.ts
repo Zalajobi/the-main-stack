@@ -67,9 +67,7 @@ userRouter.post(
       });
 
       const { email } = jwtClient.verifyJSONToken(payload.authorization, false);
-      const { data, success, message } = await getUserDataByEmail(
-        email,
-      );
+      const { data, success, message } = await getUserDataByEmail(email);
 
       if (!success) {
         return JsonApiResponse(res, message, false, null, 404);

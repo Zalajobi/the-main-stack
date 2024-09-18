@@ -1,19 +1,25 @@
-import {RegisterBrandRequestSchema} from "../schema/sellerSchemas";
-import {DefaultFunctionResponse} from "../types/index.types";
+import { RegisterBrandRequestSchema } from "../schema/sellerSchemas";
+import { DefaultFunctionResponse } from "../types/index.types";
 import { brandRepository } from "../typeorm/repositories";
-import {Brand} from "../typeorm/entity/Brand";
-import {getSellerDetailsById, updateSellerDetailsById} from "./sellerDetailsStore";
-import {SellerDetails} from "../typeorm/entity/SellerDetails";
+import { Brand } from "../typeorm/entity/Brand";
+import {
+  getSellerDetailsById,
+  updateSellerDetailsById,
+} from "./sellerDetailsStore";
+import { SellerDetails } from "../typeorm/entity/SellerDetails";
 
-export const sellerCreatesNewBrand = async (data: RegisterBrandRequestSchema, user: Record<string, any>): Promise<DefaultFunctionResponse> => {
+export const sellerCreatesNewBrand = async (
+  data: RegisterBrandRequestSchema,
+  user: Record<string, any>,
+): Promise<DefaultFunctionResponse> => {
   const brandRepo = brandRepository();
 
   if (!user.sellerDetails) {
     return {
       success: false,
       message: "Seller details not found",
-      data: null
-    }
+      data: null,
+    };
   }
 
   const brand = new Brand();
@@ -31,8 +37,8 @@ export const sellerCreatesNewBrand = async (data: RegisterBrandRequestSchema, us
     return {
       success: false,
       message: "Brand not created",
-      data: null
-    }
+      data: null,
+    };
   }
 
   // get seller and push to brands array
@@ -46,6 +52,6 @@ export const sellerCreatesNewBrand = async (data: RegisterBrandRequestSchema, us
   return {
     success: true,
     message: "Brand successfully registered",
-    data: newBrand
-  }
-}
+    data: newBrand,
+  };
+};

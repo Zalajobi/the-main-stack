@@ -35,4 +35,3 @@ export const updateUserDetailsByUserId = async (
     !!updatedUser.affected,
   );
 };
-
