@@ -7,3 +7,9 @@ export type JWTDataProperties = {
   iat?: number;
   exp?: number;
 };
+
+export type DefaultFunctionResponse = {
+  message: string;
+  data: any;
+  success: boolean;
+};

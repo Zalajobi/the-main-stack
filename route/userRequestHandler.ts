@@ -10,6 +10,7 @@ import {
   TWENTY_FOUR_HOURS_SECONDS,
 } from "../util/constants";
 import { SellerSignupRequestSchema } from "../schema/userSchemas";
+import { createNewSellerDetails } from "../store/sellerDetailsStore";
 
 const userRouter = Router();
 
@@ -65,13 +66,29 @@ userRouter.post(
         ...req.headers,
       });
 
-      JsonApiResponse(
-        res,
-        "Seller Registration Successful",
-        true,
-        payload,
-        200,
+      const authUser = jwtClient.verifyJSONToken(payload.authorization, false);
+      const { data, success, message } = await getUserDataByEmail(
+        authUser.email,
       );
+
+      if (!success) {
+        return JsonApiResponse(res, message, false, null, 404);
+      }
+
+      if (data.isSeller) {
+        return JsonApiResponse(
+          res,
+          "User is already a seller",
+          false,
+          null,
+          400,
+        );
+      }
+
+      const { success: storeSuccess, message: storeMessage } =
+        await createNewSellerDetails(payload, data.id);
+
+      JsonApiResponse(res, storeMessage, storeSuccess, null, 200);
     } catch (error) {
       next(error);
     }
