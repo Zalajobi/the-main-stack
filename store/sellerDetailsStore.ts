@@ -45,3 +45,28 @@ export const createNewSellerDetails = async (
 
   return DefaultJsonResponse("Seller Registration Successful", null, true);
 };
+
+export const updateSellerDetailsById = async (
+  data: Record<string, any>,
+  sellerId: ObjectId,
+): Promise<DefaultFunctionResponse> => {
+  const sellerDetailsRepo = sellerDetailsRepository();
+
+  const updatedSeller = await sellerDetailsRepo.update(sellerId, data);
+
+  return DefaultJsonResponse(
+    updatedSeller ? "Seller details updated" : "Seller details not updated",
+    null,
+    !!updatedSeller.affected,
+  );
+};
+
+export const getSellerDetailsById = async (sellerId: ObjectId) => {
+  const sellerDetailsRepo = sellerDetailsRepository();
+
+  return await sellerDetailsRepo.findOne({
+    where: {
+      _id: sellerId,
+    },
+  });
+};
