@@ -1,6 +1,12 @@
-import {Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn} from "typeorm";
-import {Cart} from "./Cart";
-import {SellerDetails} from "./SellerDetails";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectId,
+  ObjectIdColumn,
+} from "typeorm";
+import { Cart } from "./Cart";
+import { SellerDetails } from "./SellerDetails";
 
 @Entity()
 export class User {
@@ -35,13 +41,13 @@ export class User {
   @Column({
     name: "dob",
     nullable: true,
-    type: "timestamp"
+    type: "timestamp",
   })
   dob: Date;
 
   @Column({
     nullable: true,
-    name: "profilePic"
+    name: "profilePic",
   })
   profilePic?: string;
 
@@ -53,7 +59,7 @@ export class User {
 
   @Column({
     nullable: true,
-    name: "sellerDetails"
+    name: "sellerDetails",
   })
   sellerDetails?: SellerDetails;
 
@@ -63,7 +69,7 @@ export class User {
   @CreateDateColumn({
     name: "createdAt",
     type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)"
+    default: () => "CURRENT_TIMESTAMP(6)",
   })
   createdAt: Date;
 }

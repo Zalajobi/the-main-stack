@@ -1,7 +1,13 @@
-import {Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn} from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ObjectId,
+  ObjectIdColumn,
+} from "typeorm";
 
 @Entity({
-  name: "orderItem"
+  name: "orderItem",
 })
 export class OrderItem {
   @ObjectIdColumn()
@@ -16,7 +22,7 @@ export class OrderItem {
   @CreateDateColumn({
     name: "createdAt",
     type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)"
+    default: () => "CURRENT_TIMESTAMP(6)",
   })
   createdAt: Date;
 }
