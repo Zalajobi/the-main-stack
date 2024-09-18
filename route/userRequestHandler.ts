@@ -66,9 +66,9 @@ userRouter.post(
         ...req.headers,
       });
 
-      const authUser = jwtClient.verifyJSONToken(payload.authorization, false);
+      const { email } = jwtClient.verifyJSONToken(payload.authorization, false);
       const { data, success, message } = await getUserDataByEmail(
-        authUser.email,
+        email,
       );
 
       if (!success) {
@@ -88,7 +88,7 @@ userRouter.post(
       const { success: storeSuccess, message: storeMessage } =
         await createNewSellerDetails(payload, data.id);
 
-      JsonApiResponse(res, storeMessage, storeSuccess, null, 200);
+      return JsonApiResponse(res, storeMessage, storeSuccess, null, 200);
     } catch (error) {
       next(error);
     }
