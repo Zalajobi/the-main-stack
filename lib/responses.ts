@@ -8,12 +8,14 @@ export const JsonApiResponse = (
   statusCode: number,
   error?: Record<string, any>,
 ) => {
-  res.send({
-    message,
-    success,
-    data,
-    error,
-  }).status(statusCode);
+  res
+    .send({
+      message,
+      success,
+      data,
+      error,
+    })
+    .status(statusCode);
 };
 
 export const DefaultJsonResponse = (

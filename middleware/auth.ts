@@ -2,8 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import { JsonApiResponse } from "../lib/responses";
 import redisClient from "../lib/redis";
 import jwtClient from "../lib/jwt";
-import {bearerTokenSchema} from "../schema/commonSchamas";
-import {ACCESS_TOKEN_HEADER_NAME, FIVE_MINUTE_MILLISECONDS} from "../util/constants";
+import { bearerTokenSchema } from "../schema/commonSchamas";
+import {
+  ACCESS_TOKEN_HEADER_NAME,
+  FIVE_MINUTE_MILLISECONDS,
+} from "../util/constants";
 
 export const authorizeRequest = async (
   req: Request,
@@ -33,7 +36,9 @@ export const authorizeRequest = async (
 
       if (remainingTime < FIVE_MINUTE_MILLISECONDS) {
         console.log("Remaining time less than 5 minutes");
-        const refreshToken = await redisClient.getRedisKey(JSON.stringify(tokenUser?.id));
+        const refreshToken = await redisClient.getRedisKey(
+          JSON.stringify(tokenUser?.id),
+        );
         const verifiedRefreshToken = jwtClient.verifyJSONToken(
           refreshToken as string,
           true,

@@ -46,6 +46,15 @@ export const errorMiddleware = async (
     });
   }
 
+  // MongoBulkWriteError
+  if (err.name === "MongoBulkWriteError") {
+    JsonApiResponse(res, "Mongo Bulk Write Error", false, null, 500, {
+      type: "mongo_error",
+      message: err.message,
+      name: err.name,
+    });
+  }
+
   // Generic Error
   if (err instanceof Error) {
     JsonApiResponse(res, "Error", false, null, 500, {

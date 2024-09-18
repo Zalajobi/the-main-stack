@@ -1,6 +1,6 @@
 import jwt, { SignOptions } from "jsonwebtoken";
 import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "../util/config";
-import {JWTDataProperties} from "../types/index.types";
+import { JWTDataProperties } from "../types/index.types";
 
 class JWTClient {
   private static instance: JWTClient;
@@ -36,8 +36,8 @@ class JWTClient {
   generateJWTAccessToken(data: JWTDataProperties) {
     const options: SignOptions = {
       // expiresIn: "15m",
-      // expiresIn: "365d", // For Dev Purpose
-      expiresIn: "1h", // For Dev Purpose
+      expiresIn: "365d", // For Dev Purpose
+      // expiresIn: "1h", // For Dev Purpose
     };
     return jwt.sign(data, JWT_ACCESS_TOKEN, options);
   }

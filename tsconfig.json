@@ -8,8 +8,7 @@
     "rootDir": "",
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "paths": {
-    },
+    "paths": {},
 
     /* JavaScript Support */
     "allowJs": true,

@@ -1,4 +1,4 @@
-import {ObjectId} from "typeorm";
+import { ObjectId } from "typeorm";
 
 export type JWTDataProperties = {
   id: ObjectId;
@@ -6,4 +6,10 @@ export type JWTDataProperties = {
   isSeller: boolean;
   iat?: number;
   exp?: number;
+};
+
+export type DefaultFunctionResponse = {
+  message: string;
+  data: any;
+  success: boolean;
 };
